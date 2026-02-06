@@ -9,13 +9,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;600&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #0a0e27;
-            --secondary: #1a1f3a;
+            --primary: #07070a;
+            --secondary: #0f1114;
             --accent: #00d9ff;
             --accent-warm: #ff6b35;
             --text: #e0e6ed;
             --text-dim: #8892a6;
-            --surface: #141829;
+            --surface: #0b0d11;
         }
 
         * {
@@ -32,26 +32,31 @@
             overflow-x: hidden;
         }
 
-        /* Animated Background Grid */
+        /* Modern Black/Gray Layered Grid */
         body::before {
             content: '';
             position: fixed;
-            top: 0;
-            left: 0;
+            inset: 0;
             width: 100%;
             height: 100%;
-            background-image: 
-                linear-gradient(rgba(0, 217, 255, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 217, 255, 0.03) 1px, transparent 1px);
-            background-size: 60px 60px;
+            /* Two layered grids: thin subtle lines + faint thicker lines for structure */
+            background-image:
+                linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px),
+                linear-gradient(rgba(255,255,255,0.02) 2px, transparent 2px),
+                linear-gradient(90deg, rgba(255,255,255,0.02) 2px, transparent 2px);
+            background-size: 40px 40px, 40px 40px, 200px 200px, 200px 200px;
+            background-position: 0 0, 0 0, 0 0, 0 0;
+            mix-blend-mode: overlay;
             pointer-events: none;
             z-index: 0;
-            animation: gridMove 20s linear infinite;
+            opacity: 0.9;
+            animation: gridMove 40s linear infinite;
         }
 
         @keyframes gridMove {
             0% { transform: translate(0, 0); }
-            100% { transform: translate(60px, 60px); }
+            100% { transform: translate(40px, 40px); }
         }
 
         /* Header */
@@ -854,10 +859,6 @@
                 <a href="https://linkedin.com/in/joseph-sheetz" target="_blank" class="contact-link">
                     <span>💼</span>
                     <span>LinkedIn</span>
-                </a>
-                <a href="tel:641-328-4419" class="contact-link">
-                    <span>📱</span>
-                    <span>Phone</span>
                 </a>
             </div>
         </div>
