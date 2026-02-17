@@ -595,12 +595,14 @@
             text-decoration: none;
             font-family: 'IBM Plex Mono', monospace;
             transition: all 0.3s ease;
+            cursor: pointer;
         }
 
         .contact-link:hover {
             border-color: var(--accent);
             transform: translateY(-4px);
             box-shadow: 0 8px 20px rgba(0, 217, 255, 0.2);
+            color: var(--accent);
         }
 
         /* Footer */
@@ -643,6 +645,134 @@
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
+        }
+
+        /* Contact Form Styles */
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            color: var(--accent);
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            padding: 0.75rem 1rem;
+            background: rgba(20, 24, 41, 0.6);
+            border: 1px solid rgba(0, 217, 255, 0.2);
+            border-radius: 4px;
+            color: var(--text);
+            font-family: 'Source Sans 3', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 10px rgba(0, 217, 255, 0.2);
+            background: rgba(20, 24, 41, 0.8);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .contact-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .btn-submit {
+            flex: 1;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--accent), var(--accent-warm));
+            color: var(--primary);
+            border: none;
+            border-radius: 4px;
+            font-family: 'IBM Plex Mono', monospace;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 217, 255, 0.4);
+        }
+
+        .btn-submit:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .form-status {
+            text-align: center;
+            padding: 1rem;
+            border-radius: 4px;
+            display: none;
+        }
+
+        .form-status.success {
+            display: block;
+            background: rgba(0, 217, 255, 0.1);
+            color: var(--accent);
+            border: 1px solid rgba(0, 217, 255, 0.3);
+        }
+
+        .form-status.error {
+            display: block;
+            background: rgba(255, 107, 53, 0.1);
+            color: var(--accent-warm);
+            border: 1px solid rgba(255, 107, 53, 0.3);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 0.8rem 1.5rem;
+            background: rgba(20, 24, 41, 0.6);
+            border: 1px solid rgba(0, 217, 255, 0.2);
+            border-radius: 8px;
+            color: var(--text);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .social-link:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 217, 255, 0.2);
         }
 
         /* Responsive */
@@ -977,18 +1107,36 @@
         </div>
         <div class="contact-content">
             <p style="color: var(--text-dim); margin-bottom: 2rem; font-size: 1.1rem;">
-                I'm always interested in discussing new opportunities, innovative projects, or collaborations in automation and engineering.
+                I'm always interested in discussing new opportunities, innovative projects, or collaborations in automation and engineering. Feel free to reach out!
             </p>
-            <div class="contact-links">
-                <a href="mailto:sheetjaa@iastate.edu" class="contact-link">
-                    <span>📧</span>
-                    <span>Email</span>
-                </a>
-                <a href="https://www.linkedin.com/in/joseph-sheetz-bb5500370/" target="_blank" class="contact-link">
+            <form class="contact-form" id="contactForm">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="subject">Subject</label>
+                    <input type="text" id="subject" name="subject" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" required></textarea>
+                </div>
+                <div class="form-status" id="formStatus"></div>
+                <div class="contact-buttons">
+                    <button type="submit" class="btn-submit">Send Message</button>
+                </div>
+            </form>
+            <div class="social-links">
+                <a href="https://www.linkedin.com/in/joseph-sheetz-bb5500370/" target="_blank" class="social-link">
                     <span>💼</span>
                     <span>LinkedIn</span>
                 </a>
-                <a href="https://github.com/Sheetjaa" target="_blank" class="contact-link">
+                <a href="https://github.com/Sheetjaa" target="_blank" class="social-link">
                     <span>💻</span>
                     <span>GitHub</span>
                 </a>
@@ -1001,6 +1149,57 @@
     </footer>
 
     <script>
+        // Contact form handling
+        const contactForm = document.getElementById('contactForm');
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const formStatus = document.getElementById('formStatus');
+                const submitButton = this.querySelector('.btn-submit');
+                
+                // Disable submit button
+                submitButton.disabled = true;
+                submitButton.textContent = 'Sending...';
+                
+                // Get form data
+                const formData = new FormData(this);
+                
+                // Send to formspree
+                fetch('https://formspree.io/f/maqdjrbg', {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                })
+                .then(response => {
+                    if (response.ok) {
+                        formStatus.textContent = 'Thank you! Your message has been sent successfully. I\'ll get back to you soon.';
+                        formStatus.classList.add('success');
+                        formStatus.classList.remove('error');
+                        contactForm.reset();
+                        submitButton.textContent = 'Send Message';
+                        submitButton.disabled = false;
+                        
+                        // Clear success message after 5 seconds
+                        setTimeout(() => {
+                            formStatus.classList.remove('success');
+                        }, 5000);
+                    } else {
+                        throw new Error('Form submission failed');
+                    }
+                })
+                .catch(error => {
+                    formStatus.textContent = 'Something went wrong. Please try again later or contact me via LinkedIn.';
+                    formStatus.classList.add('error');
+                    formStatus.classList.remove('success');
+                    submitButton.textContent = 'Send Message';
+                    submitButton.disabled = false;
+                });
+            });
+        }
+
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
