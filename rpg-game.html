@@ -136,19 +136,7 @@
         }
 
         .back-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: var(--accent);
-            text-decoration: none;
-            font-family: 'IBM Plex Mono', monospace;
-            font-size: 0.9rem;
-            margin-bottom: 2rem;
-            transition: all 0.3s ease;
-        }
-
-        .back-link:hover {
-            transform: translateX(-5px);
+            display: none;
         }
 
         .back-link::before {
@@ -378,6 +366,7 @@
         <nav>
             <a href="index.html" class="logo">JOSEPH SHEETZ</a>
             <ul class="nav-links">
+                <li><a href="index.html#projects">← Back</a></li>
                 <li><a href="index.html#about">About</a></li>
                 <li><a href="index.html#skills">Skills</a></li>
                 <li><a href="index.html#projects">Projects</a></li>
@@ -387,8 +376,6 @@
     </header>
 
     <main>
-        <a href="index.html#projects" class="back-link">Back to Projects</a>
-        
         <article>
             <div class="article-header">
                 <h1 class="article-title">2850 Final Project RPG Game</h1>
