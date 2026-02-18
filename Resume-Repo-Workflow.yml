@@ -1,0 +1,38 @@
+name: Compile LaTeX Resume to PDF
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '**.tex'
+      - '.github/workflows/compile-resume.yml'
+  workflow_dispatch:
+
+jobs:
+  compile:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      
+      - name: Compile LaTeX to PDF
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: resume25.tex
+          latexmk_use_xelatex: true
+      
+      - name: Rename PDF to resume.pdf
+        run: |
+          if [ -f resume25.pdf ]; then
+            mv resume25.pdf resume.pdf
+            echo "✓ PDF compiled successfully"
+          fi
+      
+      - name: Commit and push PDF
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add resume.pdf
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-compile: Update resume.pdf from resume25.tex" && git push)
