@@ -1,12 +1,13 @@
 name: Fetch Latest Resume from GitHub
 
 on:
-  schedule:
-    # Run every 6 hours to check for updates
-    - cron: '0 */6 * * *'
-  workflow_dispatch:  # Allow manual trigger
-  repository_dispatch:
-    types: [update-resume]
+  # DISABLED: Pipeline not working on Overleaf's side - will re-enable when fixed
+  # schedule:
+  #   # Run every 6 hours to check for updates
+  #   - cron: '0 */6 * * *'
+  workflow_dispatch:  # Allow manual trigger (commented out to disable)
+  # repository_dispatch:
+  #   types: [update-resume]
 
 jobs:
   update-resume:
