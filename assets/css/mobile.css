@@ -1,0 +1,97 @@
+/* Mobile-only overrides (applies via media attribute in HTML link) */
+/* Keeps desktop styles unchanged while improving touch and spacing on small screens */
+
+html, body {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  padding-bottom: 80px;
+  font-size: 16px;
+}
+
+header {
+  padding: 0.75rem 1rem !important;
+}
+
+nav {
+  padding: 0;
+}
+
+.nav-links {
+  display: flex !important;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem !important;
+}
+
+.nav-links a {
+  padding: 0.6rem 0.9rem;
+  font-size: 1rem !important;
+  display: inline-block;
+}
+
+.hero {
+  padding-top: 5rem !important;
+  padding-left: 1rem !important;
+  padding-right: 1rem !important;
+  grid-template-columns: 1fr !important;
+  gap: 1rem !important;
+}
+
+.hero-content h1 {
+  font-size: 2.8rem !important;
+  line-height: 1.05 !important;
+}
+
+.profile-picture, .hero-profile-pic {
+  width: 140px !important;
+  height: 140px !important;
+}
+
+.hero-buttons {
+  flex-direction: column !important;
+  gap: 0.75rem !important;
+}
+
+.btn {
+  padding: 0.9rem 1rem !important;
+  border-radius: 8px !important;
+}
+
+.btn-primary, .btn-secondary, .btn-submit {
+  width: 100% !important;
+  text-align: center !important;
+}
+
+.section-title {
+  font-size: 2rem !important;
+}
+
+.article-content, .pdf-container, .project-card {
+  padding: 1rem !important;
+}
+
+.pdf-viewer embed, .pdf-viewer iframe, .pdf-viewer {
+  height: 480px !important;
+}
+
+.projects-grid, .skills-grid, .about-content {
+  grid-template-columns: 1fr !important;
+}
+
+.contact-links {
+  flex-direction: column !important;
+  align-items: stretch !important;
+  gap: 0.75rem !important;
+}
+
+.project-tags {
+  justify-content: flex-start !important;
+}
+
+/* Slightly larger tap targets for links/buttons */
+a, button {
+  -webkit-tap-highlight-color: rgba(0,0,0,0.05);
+}

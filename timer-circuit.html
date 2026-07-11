@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Timer Circuit | Joseph Sheetz</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;600&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/mobile.css" media="(max-width: 768px)">
+    <style>
+        :root {
+            --primary: #07070a;
+            --secondary: #0f1114;
+            --accent: #00d9ff;
+            --accent-warm: #ff6b35;
+            --text: #e0e6ed;
+            --text-dim: #8892a6;
+            --surface: #0b0d11;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-padding-top: 80px;
+        }
+
+        body {
+            font-family: 'Source Sans 3', sans-serif;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: var(--text);
+            line-height: 1.8;
+            min-height: 100vh;
+        }
+
+        /* Modern Black/Gray Layered Grid */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px),
+                linear-gradient(rgba(255,255,255,0.02) 2px, transparent 2px),
+                linear-gradient(90deg, rgba(255,255,255,0.02) 2px, transparent 2px);
+            background-size: 40px 40px, 40px 40px, 200px 200px, 200px 200px;
+            background-position: 0 0, 0 0, 0 0, 0 0;
+            mix-blend-mode: overlay;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.9;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 1rem 2rem;
+            z-index: 100;
+            background: rgba(7, 7, 10, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 217, 255, 0.1);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 0;
+        }
+
+        .logo {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2rem;
+            letter-spacing: 3px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-warm));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        /* Main Content */
+        main {
+            position: relative;
+            z-index: 10;
+            margin-top: 100px;
+            margin-bottom: 50px;
+            padding: 1rem;
+        }
+
+        article {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .article-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(0, 217, 255, 0.2);
+        }
+
+        .article-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3rem;
+            letter-spacing: 1px;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--accent), var(--accent-warm));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.2;
+        }
+
+        .article-meta {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            color: var(--text-dim);
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.9rem;
+            flex-wrap: wrap;
+        }
+
+        .article-content {
+            background: rgba(15, 17, 20, 0.6);
+            border: 1px solid rgba(0, 217, 255, 0.1);
+            border-radius: 12px;
+            padding: 3rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .article-content h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.8rem;
+            margin: 2rem 0 1rem 0;
+            color: var(--accent);
+            letter-spacing: 1px;
+        }
+
+        .article-content h2:first-child {
+            margin-top: 0;
+        }
+
+        .article-content p {
+            margin-bottom: 1rem;
+            color: var(--text);
+        }
+
+        .article-content ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .article-content li {
+            margin-bottom: 0.5rem;
+        }
+
+        .highlight {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .formula {
+            background: rgba(0, 217, 255, 0.05);
+            border-left: 3px solid var(--accent);
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            font-family: 'IBM Plex Mono', monospace;
+            overflow-x: auto;
+        }
+
+        blockquote {
+            border-left: 3px solid var(--accent-warm);
+            padding-left: 1.5rem;
+            margin: 1.5rem 0;
+            color: var(--text-dim);
+            font-style: italic;
+        }
+
+        .pdf-viewer {
+            margin: 2rem 0;
+            border: 1px solid rgba(0, 217, 255, 0.2);
+            border-radius: 8px;
+            overflow: hidden;
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .pdf-viewer embed {
+            width: 100%;
+            height: 800px;
+            border: none;
+        }
+
+        .download-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--accent), var(--accent-warm));
+            color: var(--primary);
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 217, 255, 0.3);
+            margin: 1.5rem 0;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(0, 217, 255, 0.5);
+        }
+
+        /* Footer */
+        footer {
+            position: relative;
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-dim);
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.9rem;
+            z-index: 10;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .article-title {
+                font-size: 2rem;
+            }
+
+            .article-content {
+                padding: 1.5rem;
+            }
+
+            .article-meta {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .pdf-viewer embed {
+                height: 500px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="logo">JOSEPH SHEETZ</a>
+            <ul class="nav-links">
+                <li><a href="index.html#projects">← Back</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#skills">Skills</a></li>
+                <li><a href="index.html#projects">Projects</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <article>
+            <div class="article-header">
+                <h1 class="article-title">Digital Timer Circuit Design</h1>
+                <div class="article-meta">
+                    <span>⚡ Joseph Sheetz</span>
+                    <span>📚 Digital Logic Design</span>
+                    <span>🔧 Multisim</span>
+                </div>
+            </div>
+
+            <div class="article-content">
+                <h2>Project Overview</h2>
+                <p>This project demonstrates the design and implementation of a fully functional digital timer circuit using digital logic components in <span class="highlight">Multisim</span>. The circuit showcases proficiency in digital logic design, counter circuits, and integrated circuit applications.</p>
+
+                <h2>Key Features</h2>
+                <ul>
+                    <li><span class="highlight">Hexadecimal Display:</span> Six 8-bit hexadecimal displays for time visualization</li>
+                    <li><span class="highlight">Counter Implementation:</span> Digital counter chips driving the display logic</li>
+                    <li><span class="highlight">User Input Controls:</span> Configurable timer settings and control mechanisms</li>
+                    <li><span class="highlight">Countdown Functionality:</span> Switch-triggered countdown mechanism with adjustable intervals</li>
+                    <li><span class="highlight">Visual Feedback:</span> LED indicator that flashes when the countdown reaches zero</li>
+                </ul>
+
+                <h2>Circuit Architecture</h2>
+                <p>The circuit employs a hierarchical design approach, combining several functional blocks:</p>
+                <ul>
+                    <li><span class="highlight">Clock Generator:</span> Provides timing pulses for counter operation</li>
+                    <li><span class="highlight">Counter Circuits:</span> Multi-stage counters for tracking elapsed time</li>
+                    <li><span class="highlight">Logic Gates:</span> AND, OR, and NOT gates for control logic</li>
+                    <li><span class="highlight">Display Drivers:</span> Hexadecimal display controllers for time output</li>
+                    <li><span class="highlight">Input Handlers:</span> Switch debouncing and input control circuits</li>
+                </ul>
+
+                <h2>Design Challenges & Solutions</h2>
+                <p>The primary challenge in this design was coordinating the timing of multiple display stages while maintaining synchronization with the system clock. This was addressed through careful use of cascaded counters and enable signal management to ensure clean digit transitions without frequency glitches.</p>
+
+                <p>Additionally, the LED flash functionality required implementing a comparator circuit to detect when the countdown value equals zero, triggering a square-wave oscillator that drives the LED at a visible flashing frequency.</p>
+
+                <h2>Technical Tools & Components</h2>
+                <p><span class="highlight">Simulation Software:</span> Multisim provided a comprehensive environment for testing the circuit behavior before any physical implementation. The tool's integrated waveform analysis allowed for detailed timing verification.</p>
+
+                <p><span class="highlight">Components Used:</span> The design utilizes standard TTL (Transistor-Transistor Logic) integrated circuits including counter ICs, logic gate arrays, and display driver chips commonly found in digital design applications.</p>
+
+                <h2>Project Documentation</h2>
+                <p>Below is the complete project documentation including detailed schematics and design specifications:</p>
+                
+                <a href="Timer Curcit.pdf" download class="download-btn">📥 Download Full Documentation (PDF)</a>
+
+                <div class="pdf-viewer">
+                    <embed src="Timer Curcit.pdf" type="application/pdf" />
+                </div>
+
+                <h2>Key Learnings</h2>
+                <ul>
+                    <li>Mastery of digital logic gate combinations and truth table analysis</li>
+                    <li>Understanding of synchronous and asynchronous counter design</li>
+                    <li>Practical experience with multi-stage circuit integration</li>
+                    <li>Timing analysis and critical path identification</li>
+                    <li>Real-world considerations for circuit stability and signal integrity</li>
+                </ul>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Joseph Sheetz. All rights reserved.</p>
+    </footer>
+</body>
+</html>

@@ -7,6 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;600&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/mobile.css" media="(max-width: 768px)">
     <style>
         :root {
             --primary: #07070a;
@@ -155,10 +156,10 @@
             position: relative;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 8rem 2rem 4rem;
+            padding: 6rem 2rem 2rem;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 4rem;
+            gap: 3rem;
             align-items: center;
             z-index: 10;
         }
@@ -167,7 +168,7 @@
             font-family: 'Bebas Neue', sans-serif;
             font-size: 5rem;
             line-height: 0.9;
-            margin-bottom: 1rem;
+            margin-bottom: 0.75rem;
             background: linear-gradient(135deg, var(--text) 0%, var(--accent) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -179,7 +180,7 @@
             font-size: 1.5rem;
             color: var(--accent);
             font-weight: 600;
-            margin-bottom: 1rem;
+            margin-bottom: 0.75rem;
             font-family: 'IBM Plex Mono', monospace;
             animation: fadeInUp 1s ease-out 0.4s both;
         }
@@ -187,7 +188,7 @@
         .hero-content p {
             font-size: 1.1rem;
             color: var(--text-dim);
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             line-height: 1.8;
             animation: fadeInUp 1s ease-out 0.6s both;
         }
@@ -196,6 +197,7 @@
             display: flex;
             gap: 1rem;
             animation: fadeInUp 1s ease-out 0.8s both;
+            margin-top: 1.5rem;
         }
 
         .btn {
@@ -293,8 +295,8 @@
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 1.5rem;
-            margin-top: 2rem;
+            gap: 1rem;
+            margin-top: 1.5rem;
         }
 
         .stat-card {
@@ -331,13 +333,13 @@
         section {
             position: relative;
             max-width: 1200px;
-            margin: 6rem auto;
+            margin: 3.5rem auto 4rem auto;
             padding: 0 2rem;
             z-index: 10;
         }
 
         .section-header {
-            margin-bottom: 3rem;
+            margin-bottom: 2rem;
             text-align: center;
         }
 
@@ -361,12 +363,12 @@
         .about-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 3rem;
+            gap: 2.5rem;
             align-items: start;
         }
 
         .about-text p {
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.25rem;
             color: var(--text-dim);
             font-size: 1.05rem;
         }
@@ -375,9 +377,9 @@
             background: rgba(20, 24, 41, 0.6);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(0, 217, 255, 0.2);
-            padding: 2rem;
+            padding: 1.75rem;
             border-radius: 8px;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
             transition: all 0.3s ease;
         }
 
@@ -420,14 +422,14 @@
         .skills-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
+            gap: 1.5rem;
         }
 
         .skill-category {
             background: rgba(20, 24, 41, 0.6);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(0, 217, 255, 0.2);
-            padding: 2rem;
+            padding: 1.75rem;
             border-radius: 8px;
             transition: all 0.3s ease;
         }
@@ -465,7 +467,7 @@
         .projects-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 2rem;
+            gap: 1.5rem;
         }
 
         .project-card {
@@ -473,7 +475,7 @@
             backdrop-filter: blur(10px);
             border: 1px solid rgba(0, 217, 255, 0.2);
             border-radius: 8px;
-            padding: 2.5rem;
+            padding: 2rem;
             transition: all 0.4s ease;
             position: relative;
             overflow: hidden;
@@ -589,8 +591,8 @@
         .contact-links {
             display: flex;
             justify-content: center;
-            gap: 2rem;
-            margin-top: 2rem;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
         }
 
         .contact-link {
