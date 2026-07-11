@@ -128,3 +128,8 @@ header {
 a, button {
   -webkit-tap-highlight-color: rgba(0,0,0,0.05);
 }
+
+/* Hide the header 'Contact' nav link on mobile while keeping Resume visible */
+.nav-links a[href="#contact"] {
+  display: none !important;
+}
